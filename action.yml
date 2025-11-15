@@ -1,6 +1,6 @@
 # action.yaml
-name: 'Custom Github Action'
-description: 'A Github Action that takes an input and returns the square of the number'
+name: 'Lean Autoupdate Action'
+description: 'A Github Action that updates to the latest lean nightly'
 inputs:
   num:
     description: 'Enter a number'
