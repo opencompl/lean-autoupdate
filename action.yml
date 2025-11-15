@@ -2,15 +2,14 @@
 name: 'Lean Autoupdate Action'
 description: 'A Github Action that updates to the latest lean nightly'
 inputs:
-  num:
-    description: 'Enter a number'
+  dir:
+    description: 'Project Directory'
     required: true
     default: "1"
 outputs:
   num_squared:
     description: 'Square of the input'
-    # need to specify the extra `value` field for `composite` actions
-    value: ${{ steps.get-square.outputs.num_squared }}
+    value: ${{ steps.get-lean-version.outputs.version }}
 runs:
   using: 'composite'
   steps:
@@ -19,13 +18,9 @@ runs:
       with:
         python-version: '3.10'
     - name: Install Dependencies
-      run: pip install -r requirements.txt
-      shell: bash
-    - name: Pass Inputs to Shell
-      run: |
-          echo "INPUT_NUM=${{ inputs.num }}" >> $GITHUB_ENV
+      run: pip install uv
       shell: bash
     - name: Fetch the number's square
-      id: get-square
-      run: python src/get_num_square.py
+      id: get-lean-version
+      run: uv run src/get_num_square.py --dir={{ inputs.dir }}
       shell: bash

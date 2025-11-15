@@ -9,6 +9,7 @@
 from github import Github
 import argparse
 import pathlib
+import sys
 
 def get_mathlib_nightly_dates(start):
   g = Github()
@@ -42,5 +43,7 @@ lean = get_lean_toolchain_date(str(args.dir) if args.dir else '.')
 tags = get_mathlib_nightly_dates(lean)
 
 if len(tags) > 1:
-  print("nightly-testing-" + tags[1])
+  print("nightly-testing-" + tags[-2])
+else:
+  sys.exit(-1)
 
