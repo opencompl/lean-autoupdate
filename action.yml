@@ -20,9 +20,14 @@ runs:
     - name: Install Dependencies
       run: pip install uv
       shell: bash
+    - name: 'Checkout: Template Repo'
+      uses: actions/checkout@v3
+      with:
+        repository: opencompl/lean-autoupdate
+        path: '.lean-autoupdate'
     - name: Fetch the number's square
       id: get-lean-version
       run: |
         ls
-        uv run src/get_lean_version.py --dir=${{ inputs.dir }}
+        uv run .lean-autoupdate/src/get_lean_version.py --dir=${{ inputs.dir }}
       shell: bash
