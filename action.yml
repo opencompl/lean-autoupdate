@@ -30,3 +30,10 @@ runs:
       run: |
         uv run .lean-autoupdate/src/get_lean_version.py --dir=${{ inputs.dir }}
       shell: bash
+    - name: Update Lean & Mathlib
+      run: |
+        sed -e "s/\"nightly-testing.*\"/\"${{steps.get-lean-version.outputs.date}}\"/" -i lakefile.toml
+        MATHLIB_NO_CACHE_ON_UPDATE=1 lake update --no-cache
+        env:
+          LAKE_NO_CACHE: true
+          MATHLIB_NO_CACHE_ON_UPDATE: true
