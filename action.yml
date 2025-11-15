@@ -33,7 +33,7 @@ runs:
 
     - name: Lean version
       run: |
-        echo ${{steps.get-lean-version.output}}
+        echo ${{steps.get-lean-version.outputs.stdout}}
       shell: bash
 
     - name: Install elan 🕑
@@ -46,7 +46,7 @@ runs:
 
     - name: Update Lean & Mathlib
       run: |
-        sed -e "s/\"nightly-testing.*\"/\"${{steps.get-lean-version.output}}\"/" -i lakefile.toml
+        sed -e "s/\"nightly-testing.*\"/\"${{steps.get-lean-version.outputs.stdout}}\"/" -i lakefile.toml
         MATHLIB_NO_CACHE_ON_UPDATE=1 lake update --no-cache
         env:
           LAKE_NO_CACHE: true
