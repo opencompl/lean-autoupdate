@@ -31,6 +31,11 @@ runs:
         uv run .lean-autoupdate/src/get_lean_version.py --dir=${{ inputs.dir }}
       shell: bash
 
+    - name: Lean version
+      run: |
+        echo ${{steps.get-lean-version.output}}
+      shell: bash
+
     - name: Install elan 🕑
       run: |
         set -o pipefail
