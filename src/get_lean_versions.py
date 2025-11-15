@@ -45,5 +45,6 @@ tags = get_mathlib_nightly_dates(lean)
 if len(tags) > 1:
   print("nightly-testing-" + tags[-2])
 else:
+  print("No newer Lean version available")
   sys.exit(-1)
 
