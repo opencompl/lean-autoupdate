@@ -37,3 +37,4 @@ runs:
         env:
           LAKE_NO_CACHE: true
           MATHLIB_NO_CACHE_ON_UPDATE: true
+      shell: bash
