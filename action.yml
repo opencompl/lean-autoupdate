@@ -22,5 +22,5 @@ runs:
       shell: bash
     - name: Fetch the number's square
       id: get-lean-version
-      run: uv run src/get_num_square.py --dir={{ inputs.dir }}
+      run: uv run src/get_lean_version.py --dir={{ inputs.dir }}
       shell: bash
