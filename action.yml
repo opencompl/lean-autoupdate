@@ -48,6 +48,7 @@ runs:
     - name: Update Lean & Mathlib
       run: |
         sed -e "s/\"nightly-testing.*\"/\"${{steps.get-lean-version.outputs.VERSION}}\"/" -i lakefile.toml
+        cat lakefile.toml
         MATHLIB_NO_CACHE_ON_UPDATE=1 lake update --no-cache
         env:
           LAKE_NO_CACHE: true
