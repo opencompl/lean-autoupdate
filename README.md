@@ -1,3 +1,3 @@
-# Python Github Action
+# Lean Auto Update
 
 Returns square of the number passed via action
