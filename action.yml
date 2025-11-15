@@ -27,17 +27,12 @@ runs:
         path: '.lean-autoupdate'
 
     - name: Fetch the number's square
-      run: |
-        uv run .lean-autoupdate/src/get_lean_version.py --dir=${{ inputs.dir }}
-      shell: bash
-
-    - name: Fetch the number's square
       id: get-lean-version
       run: |
-        uv run .lean-autoupdate/src/get_lean_version.py --dir=${{ inputs.dir }}
+        uv run -q .lean-autoupdate/src/get_lean_version.py --dir=${{ inputs.dir }}
       shell: bash
 
-    - name: Lean version II
+    - name: Lean version
       run: |
         echo ${{steps.get-lean-version.outputs.stdout}}
       shell: bash
