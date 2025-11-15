@@ -28,6 +28,5 @@ runs:
     - name: Fetch the number's square
       id: get-lean-version
       run: |
-        ls
         uv run .lean-autoupdate/src/get_lean_version.py --dir=${{ inputs.dir }}
       shell: bash
