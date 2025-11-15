@@ -29,12 +29,12 @@ runs:
     - name: Fetch the number's square
       id: get-lean-version
       run: |
-        uv run -q .lean-autoupdate/src/get_lean_version.py --dir=${{ inputs.dir }}
+        echo VERSION=`uv run -q .lean-autoupdate/src/get_lean_version.py --dir=${{ inputs.dir }}` >> "$GITHUB_OUTPUT"
       shell: bash
 
     - name: Lean version
       run: |
-        echo ${{steps.get-lean-version.outputs.stdout}}
+        echo ${{steps.get-lean-version.outputs.VERSION}}
       shell: bash
 
     - name: Install elan 🕑
@@ -47,7 +47,7 @@ runs:
 
     - name: Update Lean & Mathlib
       run: |
-        sed -e "s/\"nightly-testing.*\"/\"${{steps.get-lean-version.outputs.stdout}}\"/" -i lakefile.toml
+        sed -e "s/\"nightly-testing.*\"/\"${{steps.get-lean-version.outputs.VERSION}}\"/" -i lakefile.toml
         MATHLIB_NO_CACHE_ON_UPDATE=1 lake update --no-cache
         env:
           LAKE_NO_CACHE: true
